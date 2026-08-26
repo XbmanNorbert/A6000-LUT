@@ -28,6 +28,8 @@ jobs:
 
       - name: Build Debug APK
         run: |
+          # 如果项目在子目录，取消下一行注释并修改路径
+          # cd your_subdir
           echo '#!/bin/sh' > gradlew
           echo 'exec gradle "$@"' >> gradlew
           chmod +x gradlew
@@ -37,4 +39,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: RingtoneApp-debug
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: app/build/outputs/apk/debug/app-debug.apk  # 如果路径不对，也需要调整
