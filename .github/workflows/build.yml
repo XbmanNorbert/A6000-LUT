@@ -62,6 +62,4 @@ jobs:
           # 注意：这里需要根据实际构建输出的路径来写，
           # 通常模块名是 app，但请根据上一步列出的目录结构调整。
           # 常见的路径是：模块名/build/outputs/apk/debug/xxx.apk
-          path: ${{ steps.locate_gradle.outputs.gradle_dir }}/app/build/outputs/apk/debug/*.apkRun cd android   # 如果项目根目录下有 android/ 子目录，改为这个；否则删除这一行
-/home/runner/work/_temp/4bd3f256-0053-4f75-8ebd-582d0b7b1e6f.sh: line 1: cd: android: No such file or directory
-Error: Process completed with exit code 1.
+          path: ${{ steps.locate_gradle.outputs.gradle_dir }}/app/build/outputs/apk/debug/*.apk
