@@ -61,8 +61,8 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback,
     // 扫描码
     private static final int SCAN_MENU = 514;
     private static final int SCAN_DELETE = 595;
-    private static final int SCAN_S1 = 516;
-    private static final int SCAN_S1_UP = 517;  // 半按释放
+    private static final int SCAN_S1 = 638;
+    private static final int SCAN_S1_UP = 639;  // 半按释放
     private static final int SCAN_S2 = 518;
     private static final int SCAN_DIAL1_CW = 525;
     private static final int SCAN_DIAL1_CCW = 526;
