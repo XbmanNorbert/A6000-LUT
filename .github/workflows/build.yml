@@ -5,7 +5,7 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-  workflow_dispatch:  # 允许手动触发
+  workflow_dispatch:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -26,18 +26,29 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
-      # ---------- 新增步骤：生成 Gradle Wrapper ----------
+      # ---------- 调试：查看目录结构 ----------
+      - name: Debug directory structure
+        run: |
+          pwd
+          ls -la
+          find . -name "settings.gradle*" -o -name "build.gradle*" | head -20
+
+      # ---------- 生成 Gradle Wrapper ----------
+      # 假设 Android 项目在 android/ 子目录下，请根据上面的输出调整 cd 路径
       - name: Generate Gradle Wrapper
         run: |
-          gradle wrapper          # 使用系统 Gradle 生成 wrapper 文件
-          chmod +x gradlew        # 赋予执行权限
-      # -------------------------------------------------
+          cd android   # 如果项目根目录下有 android/ 子目录，改为这个；否则删除这一行
+          gradle wrapper
+          chmod +x gradlew
 
+      # ---------- 构建 Debug APK ----------
       - name: Build Debug APK
-        run: ./gradlew assembleDebug   # 现在可以正常使用了
+        run: |
+          cd android   # 同样要切换到同一目录
+          ./gradlew assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: RingtoneApp-debug
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk   # 路径也要相应调整
